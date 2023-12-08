@@ -48,10 +48,13 @@
         <script>
 
             const apiKey = "d1385625adb7799e289d70c94afc7c86";
-            const apiUrl = "https://api.openweathermap.org/data/2.5/weather?lat=12.9762&lon=77.6033&appid=d1385625adb7799e289d70c94afc7c86&units=metric&q=bangalore";
+            const apiUrl = "https://api.openweathermap.org/data/2.5/weather?lat=12.9762&lon=77.6033&appid=d1385625adb7799e289d70c94afc7c86&units=metric&q=";
+            
+            const searchBox = document.querySelector(".search input")
+            const searchBtn = document.querySelector(".search button")
 
-            async function checkweather(){
-                const response = await fetch (apiUrl + '&appid=${apiKey}');
+            async function checkweather(city){
+                const response = await fetch (apiUrl + city + '&appid=${apiKey}');
                 var data = await response.json();
 
                 console.log(data);
@@ -62,7 +65,9 @@
                 document.querySelector(".wind").innerHTML = data.wind.speed+"km/h";
             }
 
-            checkweather();
+            searchBtn.addEventListener("click",()=>{
+                checkweather(searchBox.value);
+            })
 
         </script>
 
